@@ -12,8 +12,12 @@ int Node::init(int tma, int tmb) {
 }
 
 int main(void) {
-	struct Node tmn;
-	tmn.init(3, 4);
-	printf("%d, %d\n", tmn.tmi, tmn.tmj);
+	//struct Node tmn;
+	//tmn.init(3, 4);
+	//printf("%d, %d\n", tmn.tmi, tmn.tmj);
+	int tmpi;
+	scanf("%d", &tmpi);
+	tmpi = tmpi * 9 / 10;
+	printf("%d\n", tmpi);
 }
 
