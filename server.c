@@ -1,9 +1,3 @@
-/*
- * multi_thread_socket_server.c
- *
- *  Created on: Mar 14, 2014
- *      Author: nerohwang
- */
 #include<stdlib.h>
 #include<pthread.h>
 #include<sys/socket.h>
@@ -40,7 +34,6 @@ int main()
     sockfd_server = socket(AF_INET,SOCK_STREAM,0);  //ipv4,TCP
     assert(sockfd_server != -1);
 
-    //before bind(), set the attr of structure sockaddr.
     memset(&s_addr_in,0,sizeof(s_addr_in));
     s_addr_in.sin_family = AF_INET;
     s_addr_in.sin_addr.s_addr = htonl(INADDR_ANY);  //trans addr from uint32_t host byte order to network byte order.
