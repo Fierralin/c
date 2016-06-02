@@ -1,26 +1,3 @@
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *\
- * This is GNU Go, a Go program. Contact gnugo@gnu.org, or see       *
- * http://www.gnu.org/software/gnugo/ for more information.          *
- *                                                                   *
- * Copyright 1999, 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007,   *
- * 2008 and 2009 by the Free Software Foundation.                    *
- *                                                                   *
- * This program is free software; you can redistribute it and/or     *
- * modify it under the terms of the GNU General Public License as    *
- * published by the Free Software Foundation - version 3 or          *
- * (at your option) any later version.                               *
- *                                                                   *
- * This program is distributed in the hope that it will be useful,   *
- * but WITHOUT ANY WARRANTY; without even the implied warranty of    *
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the     *
- * GNU General Public License in file COPYING for more details.      *
- *                                                                   *
- * You should have received a copy of the GNU General Public         *
- * License along with this program; if not, write to the Free        *
- * Software Foundation, Inc., 51 Franklin Street, Fifth Floor,       *
- * Boston, MA 02111, USA.                                            *
-\* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-
 #include "gnugo.h"
 
 #include <stdio.h>
@@ -254,16 +231,6 @@ main(int argc, char *argv[])
 
   fprintf(stderr, "scoringmode: %s.\n", scoringmode); ///////////////
 
-/*
-  if (playmode == MODE_UNKNOWN)
-	playmode = MODE_LOAD_AND_SCORE;//*/
-
-/*
-  if (requested_boardsize != -1) {
-	if (!check_boardsize(requested_boardsize, stderr))
-	  exit(EXIT_FAILURE);
-	gnugo_clear_board(requested_boardsize);
-  }//*/
 
   /* Start random number seed. */
   if (!seed_specified)
@@ -290,6 +257,7 @@ main(int argc, char *argv[])
   }
 
   /* Read the infile if there is one. Also play up the position. */
+  /*
   if (infilename) {
 	if (!sgftree_readfile(&sgftree, infilename)) {
 	  fprintf(stderr, "Cannot open or parse '%s'\n", infilename);
@@ -304,29 +272,13 @@ main(int argc, char *argv[])
   }
   else
   /* Initialize and empty sgf tree if there was no infile. */
-	sgftreeCreateHeaderNode(&sgftree, board_size, komi, handicap); // --------------
+	//sgftreeCreateHeaderNode(&sgftree, board_size, komi, handicap); // --------------
+  sgftree_readfile(&sgftree, infilename);
 
   /* Set the game_record to be identical to the loaded one or the
    * newly created empty sgf tree.
    */
   gameinfo.game_record = sgftree;
-
-  /* Notice that we need to know the board size before we can do this.
-   */
-/*
-  if (debuginfluence_move[0]) { // ------------
-	int pos = string_to_location(board_size, debuginfluence_move);
-	debug_influence_move(pos);
-  }
-
-  /* Figure out a default mode if there was no explicit one. */
-/*
-  if (playmode == MODE_UNKNOWN) { // --------------
-	if (infilename)
-	  playmode = MODE_LOAD_AND_ANALYZE;
-	else
-	  playmode = (isatty(0)) ? MODE_ASCII : MODE_GMP;
-  }//*/
 
   if (outfile && playmode != MODE_LOAD_AND_PRINT) { // ---------------
 	output_check = fopen(outfile, "w");
@@ -353,7 +305,6 @@ main(int argc, char *argv[])
 
   return 0;
 }  /* end main */
-
 
 
 static void
