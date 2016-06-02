@@ -25,4 +25,5 @@ typedef struct ChainList {
 
 
 int main(void) {
-	
+
+}
